@@ -1,12 +1,19 @@
 .calculator {
     border: 1px solid limegreen; 
+    background-color: darkseagreen;
     width: 370px;
     height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .display {
     border: 1px solid greenyellow;
+    background-color: azure;
     width: 350px;
     height: 100px;
+    margin-bottom: 5px;
 }
 .interface {
     display: flex;
@@ -17,8 +24,10 @@
 }
 button {
     width: 87.5px;
+    height: 96px;
+    background-color: plum;
 }
-.btn.equal {
+.button.equal {
     width: 175px;
     background-color: aquamarine;
 }
