@@ -1,0 +1,24 @@
+.calculator {
+    border: 1px solid limegreen; 
+    width: 370px;
+    height: 600px;
+}
+.display {
+    border: 1px solid greenyellow;
+    width: 350px;
+    height: 100px;
+}
+.interface {
+    display: flex;
+    border: 1px solid green;
+    width: 350px;
+    height: 480px;
+    flex-wrap: wrap;
+}
+button {
+    width: 87.5px;
+}
+.btn.equal {
+    width: 175px;
+    background-color: aquamarine;
+}
