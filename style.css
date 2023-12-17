@@ -1,33 +1,63 @@
+.body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif, Verdana, Geneva, Tahoma, ;
+}
 .calculator {
-    border: 1px solid limegreen; 
-    background-color: darkseagreen;
-    width: 370px;
-    height: 600px;
+    border: 3px solid rgb(109, 89, 122); 
+    background-color: rgb(53, 80, 112);
+    width: 390px;
+    height: 640px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 .display {
-    border: 1px solid greenyellow;
-    background-color: azure;
-    width: 350px;
+    border: 1px solid rgb(109, 89, 122);
+    background-color: rgb(255, 247, 243);
+    width: 360px;
     height: 100px;
-    margin-bottom: 5px;
-}
-.interface {
+    margin-bottom: 10px;
+    font-size: 28px;
     display: flex;
-    border: 1px solid green;
-    width: 350px;
-    height: 480px;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+    
+}
+.current-number {
+    font-size: 46px;
+}
+.controls {
+    display: flex;
+    width: 370px;
+    height: 490px;
     flex-wrap: wrap;
 }
 button {
     width: 87.5px;
     height: 96px;
-    background-color: plum;
+    border: none;
+    margin: 2px;
+    border: 1px solid rgb(109, 89, 122);
+    font-size: 28px;
+}
+button:hover {
+    opacity: 0.8;
+}
+.number {
+    background-color: rgb(232, 140, 125);
 }
 .button.equal {
-    width: 175px;
-    background-color: aquamarine;
+    width: 179px;
+    background-color: rgb(181, 101, 118);
+}
+.operator {
+    background-color: rgb(234, 172, 139);
+}
+.reset,
+.clear {
+    background-color: rgb(229, 107, 111);
 }
