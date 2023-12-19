@@ -1,8 +1,13 @@
-.body {
+* {
+    font-family: sans-serif, Verdana, Geneva, Tahoma;
+    
+}
+body {
+    background-color: rgb(200, 231, 255);
+}
+.main-body {
     display: flex;
     justify-content: center;
-    align-items: center;
-    font-family: sans-serif, Verdana, Geneva, Tahoma, ;
 }
 .calculator {
     border: 3px solid rgb(109, 89, 122); 
@@ -13,10 +18,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border-radius: 10px;
 }
 .display {
     border: 1px solid rgb(109, 89, 122);
-    background-color: rgb(255, 247, 243);
+    background-color: rgb(200, 231, 255, 0.80);
     width: 360px;
     height: 100px;
     margin-bottom: 10px;
@@ -25,10 +31,19 @@
     flex-direction: column;
     align-items: flex-end;
     justify-content: space-between;
-    
+    word-wrap: break-word;
+    word-break: break-all;
+    border-radius: 8px;  
 }
 .current-number {
     font-size: 46px;
+}
+.current-number, 
+.previous-number {
+    padding: 5px;
+}
+.display .previous-number {
+    color: rgb(0, 0, 0, 0.65);
 }
 .controls {
     display: flex;
@@ -43,6 +58,7 @@ button {
     margin: 2px;
     border: 1px solid rgb(109, 89, 122);
     font-size: 28px;
+    border-radius: 5px;
 }
 button:hover {
     opacity: 0.8;
