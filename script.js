@@ -17,6 +17,7 @@ const currOperand = document.querySelector(".current-number");
 let previousNumber = "";
 let currentNumber = "";
 let operator = "";
+let result = "";
 
 //function to clear
 clear.addEventListener("click", function() {
@@ -46,35 +47,55 @@ operators.forEach((button) => {
         handleOperator(button);
     })
 })
-
+// get's the 2nd operand
  function handleOperator(button) {
     operator = button;
     previousNumber = currentNumber;
     currentNumber = "";
     prevOperand.append(previousNumber);
+    if(currentNumber == !"") {
+        prevOperand.append(button);
+    };
 
- }
-// to get 2nd operator
-//??
+}
 
 //basic math operations functions
 const add = function(a,b) {
-    return a + b;
+    result = a + b
+    return result;
 }
 
 const subtract = function(a, b) {
-    return a - b;
+    result = a - b
+    return result;
 }
 
 const multiply = function(a, b) {
-    return a * b;
+    result = a * b
+    return result;
 }
 
 const divide = function(a, b) {
-    return a / b;
+    result = a / b
+    return result;
 }
-// calculator function
-function operate(a, b, operator) { //takes numbers and operator to call one of the math functions
-// depending on the key pressed, one of the math functions will be called
-
+// calculator function -- atm non functional
+equal.addEventListener("click", function operate() {
+    currentNumber = result; /// need to somehow display results on currOperand of screen
+});
+function operate(previousNumber, currentNumber, operator) {
+    switch (operator) {
+        case "+": 
+            add(previousNumber, currentNumber);
+            break;
+        case "-":
+            subtract(previousNumber, currentNumber);
+            break;
+        case "*":
+            mulptiply(previousNumber, currentNumber);
+            break;
+        case "/":
+            divide(previousNumber, currentNumber);
+            break;
+    }
 }
