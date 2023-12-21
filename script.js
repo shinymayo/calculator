@@ -86,7 +86,7 @@ const percent = function(a, b) {
 }
 // calculator function -- atm non functional
 equal.addEventListener("click", function operate() {
-    currentNumber = result; /// need to somehow display results on currOperand of screen
+    currentNumber.textContent = result; /// need to somehow display results on currOperand of screen
 });
 function operate(previousNumber, currentNumber, operator) {
     switch (operator) {
@@ -103,4 +103,7 @@ function operate(previousNumber, currentNumber, operator) {
             divide(previousNumber, currentNumber);
             break;
     }
+}
+function roundNumber(num) {
+    return Math.round(num * 1000) / 1000;
 }
