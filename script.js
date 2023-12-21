@@ -14,10 +14,10 @@ const calcDisplay = document.querySelector(".display");
 const prevOperand = document.querySelector(".previous-number");
 const currOperand = document.querySelector(".current-number");
 
-let previousNumber = "";
-let currentNumber = "";
+let previousNumber = ""; //
+let currentNumber = ""; // 
 let operator = "";
-let result = "";
+let result = ""; // is this needed?
 
 //function to clear
 clear.addEventListener("click", function() {
@@ -33,30 +33,29 @@ reset.addEventListener("click", function() {
 })
 
 //to get numbers for 1st operand
-number.forEach((button) => {
-    button.addEventListener("click", function() {
+number.forEach((num) => {
+    num.addEventListener("click", function() {
             currOperand.textContent += this.value;
             currentNumber = currOperand.textContent;
     })
 })
 
 // to get the operator 
-operators.forEach((button) => {
-    button.addEventListener("click", function() {
+operators.forEach((op) => {
+    op.addEventListener("click", function() {
         currOperand.textContent = this.value;
-        handleOperator(button);
+        handleOperator(op);
     })
 })
 // get's the 2nd operand
- function handleOperator(button) {
-    operator = button;
+function handleOperator(op) {
+    operator = op.value;
     previousNumber = currentNumber;
     currentNumber = "";
     prevOperand.append(previousNumber);
-    if(currentNumber == !"") {
-        prevOperand.append(button);
-    };
-
+    if (currentNumber !== "") {
+        prevOperand.append(operator);
+    }
 }
 
 //basic math operations functions
@@ -86,24 +85,50 @@ const percent = function(a, b) {
 }
 // calculator function -- atm non functional
 equal.addEventListener("click", function operate() {
-    currentNumber.textContent = result; /// need to somehow display results on currOperand of screen
+    operate(); /// need to somehow display results on currOperand of screen
+    prevOperand.textContent = "";
+    currOperand.textContent = previousNumber;
+
+
+
+    decimal.addEventListener("click", function() {
+        addDecimal();// how to allow it to happen once?
+    })
 });
 function operate(previousNumber, currentNumber, operator) {
+    previousNumber = Number(previousNumber);
+    currentNumber = Number(currentNumber);
     switch (operator) {
         case "+": 
-            add(previousNumber, currentNumber);
+            currOperand.textContent = add(previousNumber, currentNumber);
             break;
         case "-":
-            subtract(previousNumber, currentNumber);
+            currOperand.textContent = subtract(previousNumber, currentNumber);
             break;
         case "x":
-            mulptiply(previousNumber, currentNumber);
+            currOperand.textContent = mulptiply(previousNumber, currentNumber);
             break;
         case "/":
-            divide(previousNumber, currentNumber);
+            if (currentNumber === "0" || previousNumber === "0") {
+                currOperand.textContent = "error";
+                currentNumber = "";
+                previousNumber = "";
+                operator = "";
+                return;
+            }
+            currOperand.textContent = divide(previousNumber, currentNumber);
+            break;
+        case "%":
+            currOperand.textContent = percent(previousNumber, currentNumber);
             break;
     }
+
 }
 function roundNumber(num) {
     return Math.round(num * 1000) / 1000;
+}
+function addDecimal() {
+    if(!currentNumber.includes(".")) {
+        currentNumber += ".";
+    }
 }
