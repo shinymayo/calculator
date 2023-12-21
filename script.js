@@ -60,35 +60,30 @@ function handleOperator(op) {
 
 //basic math operations functions
 const add = function(a,b) {
-    result = a + b
-    return result;
+    return a + b;
 }
 
 const subtract = function(a, b) {
-    result = a - b
-    return result;
+    return a - b;
 }
 
 const multiply = function(a, b) {
-    result = a * b
-    return result;
+    return a * b;
 }
 
 const divide = function(a, b) {
-    result = a / b
-    return result;
+    return a / b;
 }
 
 const percent = function(a, b) {
-    result = b / a * 100;
-    return `${result}%`;
+    return b / a * 100;
+
 }
 // calculator function -- atm non functional
 equal.addEventListener("click", function operate() {
     /// need to somehow display results on currOperand of screen
     prevOperand.textContent = "";
     currOperand.textContent = previousNumber;
-
 
 
     decimal.addEventListener("click", function() {
