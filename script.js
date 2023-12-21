@@ -17,7 +17,7 @@ const currOperand = document.querySelector(".current-number");
 let previousNumber = ""; //
 let currentNumber = ""; // 
 let operator = "";
-let result = ""; // is this needed?
+let result = ""; // is this needed? result will display in the currOperand screen anyway
 
 //function to clear
 clear.addEventListener("click", function() {
@@ -85,44 +85,40 @@ const percent = function(a, b) {
 }
 // calculator function -- atm non functional
 equal.addEventListener("click", function operate() {
-    operate(); /// need to somehow display results on currOperand of screen
+    /// need to somehow display results on currOperand of screen
     prevOperand.textContent = "";
     currOperand.textContent = previousNumber;
 
 
 
     decimal.addEventListener("click", function() {
-        addDecimal();// how to allow it to happen once?
+        addDecimal();// how to allow it to happen once? doesn't work as intended
     })
 });
 function operate(previousNumber, currentNumber, operator) {
     previousNumber = Number(previousNumber);
     currentNumber = Number(currentNumber);
-    switch (operator) {
-        case "+": 
-            currOperand.textContent = add(previousNumber, currentNumber);
-            break;
-        case "-":
-            currOperand.textContent = subtract(previousNumber, currentNumber);
-            break;
-        case "x":
-            currOperand.textContent = mulptiply(previousNumber, currentNumber);
-            break;
-        case "/":
-            if (currentNumber === "0" || previousNumber === "0") {
-                currOperand.textContent = "error";
-                currentNumber = "";
-                previousNumber = "";
-                operator = "";
-                return;
-            }
-            currOperand.textContent = divide(previousNumber, currentNumber);
-            break;
-        case "%":
-            currOperand.textContent = percent(previousNumber, currentNumber);
-            break;
+    operator = operator;
+    if (operator === "+") {
+        currOperand.textContent = add(previousNumber, currentNumber);
+    } else if (operator === "-") {
+        currOperand.textContent = subtract(previousNumber, currentNumber);
+    } else if (operator === "x") {
+        currOperand.textContent = multiply(previousNumber, currentNumber);
+    } else if (operator === "/") {
+        if (currentNumber === "0" || previousNumber === "0") {
+            currOperand.textContent = "error";
+            currentNumber = "";
+            previousNumber = "";
+            operator = "";
+            return;
+        }
+        currOperand.textContent = divide(previousNumber, currentNumber);
+    } else if (operator === "%") {
+        currOperand.textContent = percent(previousNumber, currentNumber);
     }
 
+    console.log(previousNumber, currentNumber, operator);
 }
 function roundNumber(num) {
     return Math.round(num * 1000) / 1000;
