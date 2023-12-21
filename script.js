@@ -79,6 +79,11 @@ const divide = function(a, b) {
     result = a / b
     return result;
 }
+
+const percent = function(a, b) {
+    result = b / a * 100;
+    return `${result}%`;
+}
 // calculator function -- atm non functional
 equal.addEventListener("click", function operate() {
     currentNumber = result; /// need to somehow display results on currOperand of screen
@@ -91,7 +96,7 @@ function operate(previousNumber, currentNumber, operator) {
         case "-":
             subtract(previousNumber, currentNumber);
             break;
-        case "*":
+        case "x":
             mulptiply(previousNumber, currentNumber);
             break;
         case "/":
