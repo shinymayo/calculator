@@ -32,31 +32,27 @@ reset.addEventListener("click", function() {
     currOperand.textContent = currentNumber;
 })
 
-//to get numbers for 1st operand
+//to get numbers for 1st and 2nd operands 
 number.forEach((num) => {
     num.addEventListener("click", function() {
-            currOperand.textContent += this.value;
-            currentNumber = currOperand.textContent;
+            currOperand.textContent += this.value; //screen has the value of the buttons pressed
+            currentNumber = currOperand.textContent; //number is asigned to current number
+            if (prevOperand !== "") { //if the previous sreen is not empty -----------------------------------
+                prevOperand.append(operator); //then the operator goes up ------------------------------------ probably should go to the operators section
+            }
+            
     })
 })
 
 // to get the operator 
 operators.forEach((op) => {
     op.addEventListener("click", function() {
-        currOperand.textContent = this.value;
-        handleOperator(op);
+        currOperand.textContent = this.value; // current is the operator
+        previousNumber = currentNumber; // number from before becomes previous number
+        prevOperand.append(previousNumber); // previous number goes up
+        // handleOperator(op);
     })
 })
-// get's the 2nd operand
-function handleOperator(op) {
-    operator = op.value;
-    previousNumber = currentNumber;
-    currentNumber = "";
-    prevOperand.append(previousNumber);
-    if (currentNumber !== "") {
-        prevOperand.append(operator);
-    }
-}
 
 //basic math operations functions
 const add = function(a,b) {
@@ -80,8 +76,9 @@ const percent = function(a, b) {
 
 }
 // calculator function -- atm non functional
-equal.addEventListener("click", function operate() {
+equal.addEventListener("click", function() {
     /// need to somehow display results on currOperand of screen
+    operate(previousNumber, currentNumber, operator);
     prevOperand.textContent = "";
     currOperand.textContent = previousNumber;
 
