@@ -3,120 +3,52 @@ window.addEventListener("DOMContentLoaded", function() {
     console.log("Everything is loaded");
 })
 
-// define variable you will work with
-const operators = document.querySelectorAll(".operator");
+// define variables to work with
+const actions = document.querySelectorAll(".operator"); // operators
 const equal = document.querySelector(".equal");
 const decimal = document.querySelector("#decimal");
-const number = document.querySelectorAll(".number")
+const numberButtons = document.querySelectorAll(".number")
 const reset = document.querySelector(".reset");
 const clear = document.querySelector(".clear");
 const calcDisplay = document.querySelector(".display");
-const prevOperand = document.querySelector(".previous-number");
-const currOperand = document.querySelector(".current-number");
+const prevScreen = document.querySelector(".previous-number");
+const currScreen = document.querySelector(".current-number");
 
-let previousNumber = ""; //
-let currentNumber = ""; // 
+let previousNumber = "";
+let currentNumber = ""; 
 let operator = "";
-let result = ""; // is this needed? result will display in the currOperand screen anyway
 
-//function to clear
-clear.addEventListener("click", function() {
-    currOperand.textContent = currOperand.textContent.toString().slice(0, -1);
+numberButtons.forEach((button) => {
+    button.addEventListener("click", function() {
+        currentNumber += this.value; //current number this.value === this.textContent?
+        currScreen.textContent = currentNumber; //current num is displayed
+        console.log(previousNumber, currentNumber, operator);
+        // if (button === "." && currScreen.includes(".")) return;
+    })
+});
+
+actions.forEach((button) => {
+    button.addEventListener("click", function() {
+        operator = this.value; // operator is what i clicked
+        previousNumber = currentNumber; //1st number changes variable
+        currentNumber = ""; // current is empty
+        prevScreen.textContent = previousNumber + operator; //1st number goes up with operator
+        currScreen.textContent = currentNumber; //2nd number is current
+    })
+});
+
+// dot can be pressed only once
+// equal executes the operate() function.
+
+//function to delete
+clear.addEventListener("click", function clearNumber() {
+    currScreen.textContent = currScreen.textContent.toString().slice(0, -1);
 })
-//function to reset
-reset.addEventListener("click", function() {
+//function to clear all
+reset.addEventListener("click", function clearAll() {
     previousNumber = "";
     currentNumber = "";
     operator = "";
-    prevOperand.textContent = currentNumber;
-    currOperand.textContent = currentNumber;
+    prevScreen.textContent = currentNumber;
+    currScreen.textContent = currentNumber;
 })
-
-//to get numbers for 1st and 2nd operands 
-number.forEach((num) => {
-    num.addEventListener("click", function() {
-            currOperand.textContent += this.value; //screen has the value of the buttons pressed
-            currentNumber = currOperand.textContent; //number is asigned to current number
-            if (prevOperand !== "") { //if the previous sreen is not empty -----------------------------------
-                prevOperand.append(operator); //then the operator goes up ------------------------------------ probably should go to the operators section
-            }
-            
-    })
-})
-
-// to get the operator 
-operators.forEach((op) => {
-    op.addEventListener("click", function() {
-        currOperand.textContent = this.value; // current is the operator
-        previousNumber = currentNumber; // number from before becomes previous number
-        prevOperand.append(previousNumber); // previous number goes up
-        // handleOperator(op);
-    })
-})
-
-//basic math operations functions
-const add = function(a,b) {
-    return a + b;
-}
-
-const subtract = function(a, b) {
-    return a - b;
-}
-
-const multiply = function(a, b) {
-    return a * b;
-}
-
-const divide = function(a, b) {
-    return a / b;
-}
-
-const percent = function(a, b) {
-    return b / a * 100;
-
-}
-// calculator function -- atm non functional
-equal.addEventListener("click", function() {
-    /// need to somehow display results on currOperand of screen
-    operate(previousNumber, currentNumber, operator);
-    prevOperand.textContent = "";
-    currOperand.textContent = previousNumber;
-
-
-    decimal.addEventListener("click", function() {
-        addDecimal();// how to allow it to happen once? doesn't work as intended
-    })
-});
-function operate(previousNumber, currentNumber, operator) {
-    previousNumber = Number(previousNumber);
-    currentNumber = Number(currentNumber);
-    operator = operator;
-    if (operator === "+") {
-        currOperand.textContent = add(previousNumber, currentNumber);
-    } else if (operator === "-") {
-        currOperand.textContent = subtract(previousNumber, currentNumber);
-    } else if (operator === "x") {
-        currOperand.textContent = multiply(previousNumber, currentNumber);
-    } else if (operator === "/") {
-        if (currentNumber === "0" || previousNumber === "0") {
-            currOperand.textContent = "error";
-            currentNumber = "";
-            previousNumber = "";
-            operator = "";
-            return;
-        }
-        currOperand.textContent = divide(previousNumber, currentNumber);
-    } else if (operator === "%") {
-        currOperand.textContent = percent(previousNumber, currentNumber);
-    }
-
-    console.log(previousNumber, currentNumber, operator);
-}
-function roundNumber(num) {
-    return Math.round(num * 1000) / 1000;
-}
-function addDecimal() {
-    if(!currentNumber.includes(".")) {
-        currentNumber += ".";
-    }
-}
