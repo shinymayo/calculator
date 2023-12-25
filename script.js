@@ -17,16 +17,14 @@ const currScreen = document.querySelector(".current-number");
 let previousNumber = "";
 let currentNumber = ""; 
 let operator = "";
-
+// to get the current and previous numbers
 numberButtons.forEach((button) => {
     button.addEventListener("click", function() {
         currentNumber += this.value; //current number this.value === this.textContent?
         currScreen.textContent = currentNumber; //current num is displayed
-        console.log(previousNumber, currentNumber, operator);
-        // if (button === "." && currScreen.includes(".")) return;
     })
 });
-
+// to get the operator
 actions.forEach((button) => {
     button.addEventListener("click", function() {
         operator = this.value; // operator is what i clicked
@@ -36,9 +34,42 @@ actions.forEach((button) => {
         currScreen.textContent = currentNumber; //2nd number is current
     })
 });
+// make equal button functional
+equal.addEventListener("click", operate(previousNumber, currentNumber, operator));
+
+function operate(previousNumber, currentNumber, operator) {
+    previousNumber = Number(previousNumber);
+    currentNumber = Number(currentNumber);
+    switch (operator) {
+        case "+": return add(previousNumber, currentNumber);
+        case "-": return subtract(previousNumber, currentNumber);
+        case "*": return multiply(previousNumber, currentNumber);
+        case "/": return divide(previousNumber, currentNumber);
+        case "%": return percent(previousNumber, currentNumber);
+    }
+}
+//basic math operations functions
+const add = function (a, b) {
+  return a + b;
+};
+
+const subtract = function (a, b) {
+  return a - b;
+};
+
+const multiply = function (a, b) {
+  return a * b;
+};
+
+const divide = function (a, b) {
+  return a / b;
+};
+
+const percent = function (a, b) {
+  return (b / a) * 100;
+};
 
 // dot can be pressed only once
-// equal executes the operate() function.
 
 //function to delete
 clear.addEventListener("click", function clearNumber() {
