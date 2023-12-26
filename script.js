@@ -17,6 +17,7 @@ const currScreen = document.querySelector(".current-number");
 let previousNumber = "";
 let currentNumber = ""; 
 let operator = "";
+let result;
 // to get the current and previous numbers
 numberButtons.forEach((button) => {
     button.addEventListener("click", function() {
@@ -36,40 +37,46 @@ actions.forEach((button) => {
 });
 // make equal button functional
 equal.addEventListener("click", operate(previousNumber, currentNumber, operator));
-
+//need to display it on the current screen
 function operate(previousNumber, currentNumber, operator) {
     previousNumber = Number(previousNumber);
-    currentNumber = Number(currentNumber);
-    switch (operator) {
-        case "+": return add(previousNumber, currentNumber);
-        case "-": return subtract(previousNumber, currentNumber);
-        case "*": return multiply(previousNumber, currentNumber);
-        case "/": return divide(previousNumber, currentNumber);
-        case "%": return percent(previousNumber, currentNumber);
-    }
-}
+    currentNumber = Number(currentNumber)
+    // switch (operator) {
+    //     case "+": return add(previousNumber, currentNumber)
+    //     case "-": return subtract(previousNumber, currentNumber)
+    //     case "*": return multiply(previousNumber, currentNumber)
+    //     case "/": return divide(previousNumber, currentNumber)
+    //     case "%": return percent(previousNumber, currentNumber)
+    //     default: return
+    // }
+    
+    
+};
 //basic math operations functions
 const add = function (a, b) {
-  return a + b;
+    let result = a + b;
+    return roundNumber(result);
 };
 
 const subtract = function (a, b) {
-  return a - b;
+    let result = a - b;
+    return roundNumber(result);
 };
 
 const multiply = function (a, b) {
-  return a * b;
+    let result = a * b;
+    return roundNumber(result);
 };
 
 const divide = function (a, b) {
-  return a / b;
+    let result = a / b;
+    return roundNumber(result);
 };
 
 const percent = function (a, b) {
-  return (b / a) * 100;
+    let result = (a / b) * 100;
+    return roundNumber(result);
 };
-
-// dot can be pressed only once
 
 //function to delete
 clear.addEventListener("click", function clearNumber() {
@@ -83,3 +90,6 @@ reset.addEventListener("click", function clearAll() {
     prevScreen.textContent = currentNumber;
     currScreen.textContent = currentNumber;
 })
+function roundNumber(num) {
+  return Math.round(num * 1000) / 1000;
+}
