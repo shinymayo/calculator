@@ -1,17 +1,14 @@
 // check that the page is loaded
 window.addEventListener("DOMContentLoaded", function() {
     console.log("Everything is loaded");
-
 })
 
 // define variables to work with
-const actions = document.querySelectorAll(".operator"); // operators
+const actions = document.querySelectorAll(".operator"); 
 const equal = document.querySelector(".equal");
-const decimal = document.querySelector("#decimal");
 const numberButtons = document.querySelectorAll(".number")
 const reset = document.querySelector(".reset");
 const clear = document.querySelector(".clear");
-const calcDisplay = document.querySelector(".display");
 const prevScreen = document.querySelector(".previous-number");
 const currScreen = document.querySelector(".current-number");
 
@@ -45,10 +42,7 @@ actions.forEach((button) => {
 equal.addEventListener("click", function() {
     operate();
     prevScreen.textContent = "";
-    currScreen.textContent = currentNumber; // this is the problem line
-    //from Web Dev Simplified function updateDisplay():
-    //currScreen.textContent = currentNumber;
-    //prevScreen.textContent = previousNumber;
+    currScreen.textContent = currentNumber;
 });
 //need to display it on the current screen
 function operate() {
@@ -81,8 +75,7 @@ function operate() {
     previousNumber = "";
 };
 
-//basic math operations functions
-// additional functions for better user experience
+//function to round the number --- works but how to incorporate it
 function roundNumber(num) {
   return Math.round(num * 1000) / 1000;
 }
@@ -91,11 +84,12 @@ function roundNumber(num) {
 clear.addEventListener("click", function clearNumber() {
     currScreen.textContent = currScreen.textContent.toString().slice(0, -1);
 })
+
 //function to clear all
 reset.addEventListener("click", function clearAll() {
     previousNumber = "";
     currentNumber = "";
     operator = "";
-    prevScreen.textContent = ""; // same as making it equal to currentNumber
-    currScreen.textContent = ""; // both options work
+    prevScreen.textContent = "";
+    currScreen.textContent = ""; 
 })
