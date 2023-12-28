@@ -18,24 +18,27 @@ const currScreen = document.querySelector(".current-number");
 let previousNumber = "";
 let currentNumber = ""; 
 let operator = "";
-let result = ""; // this is not tied to anything
 
 // to get the current and previous numbers
 numberButtons.forEach((button) => {
     button.addEventListener("click", function() {
         if (button.value === "." && currentNumber.includes(".")) return;
-        currentNumber += this.value; //current number this.value === this.textContent?
-        currScreen.textContent = currentNumber; //current num is displayed
+        currentNumber += this.value; 
+        currScreen.textContent = currentNumber;
     })
 });
 // to get the operator
 actions.forEach((button) => {
     button.addEventListener("click", function() {
-        operator = this.value; // operator is what i clicked
-        previousNumber = currentNumber; //1st number changes variable
-        currentNumber = ""; // current is empty
-        prevScreen.textContent = previousNumber + operator; //1st number goes up with operator
-        currScreen.textContent = currentNumber; //2nd number is current
+        if (currentNumber === "") return;
+        if (previousNumber !== "") {
+            operate();
+        }
+        operator = this.value; 
+        previousNumber = currentNumber; 
+        currentNumber = "";
+        prevScreen.textContent = previousNumber + operator; 
+        currScreen.textContent = currentNumber;
     })
 });
 // make equal button functional
@@ -43,53 +46,46 @@ equal.addEventListener("click", function() {
     operate();
     prevScreen.textContent = "";
     currScreen.textContent = currentNumber; // this is the problem line
+    //from Web Dev Simplified function updateDisplay():
+    //currScreen.textContent = currentNumber;
+    //prevScreen.textContent = previousNumber;
 });
-let finish;
 //need to display it on the current screen
-function operate(previousNumber, currentNumber, operator) {
+function operate() {
+    let result;
+    const previous = parseFloat(previousNumber);
+    const current = parseFloat(currentNumber);
     
-    previousNumber = parseFloat(previousNumber); 
-    currentNumber = parseFloat(currentNumber); 
+    if (isNaN(previous) || isNaN(current)) return;
     switch (operator) {
-        case "+": parseFloat(finish) = add(previousNumber, currentNumber); 
-        case "-": parseFloat(finish) = subtract(previousNumber, currentNumber);
-        case "x": parseFloat(finish) = multiply(previousNumber, currentNumber);
-        case "/": parseFloat(finish) = divide(previousNumber, currentNumber);
-        case "%": parseFloat(finish) = percent(previousNumber, currentNumber);
-    } //return the result
-    currentNumber = finish;
+      case "+":
+        result = previous + current;
+        break;
+      case "-":
+        result = previous - current;
+        break;
+      case "x":
+        result = previous * current;
+        break;
+      case "÷":
+        result = previous / current;
+        break;
+      case "%":
+        result = (previous / current) * 100;
+        break;
+      default:
+        return;
+    }
+    currentNumber =result;
     operator = undefined;
     previousNumber = "";
-    console.log(parseFloat(finish)); // why its not a number????
-    // previousNumber = previousNumber; // to string, even removed still get NaN
-    // currentNumber = previousNumber; // to string
 };
 
 //basic math operations functions
-const add = function (a, b) {
-    let result = a + b;
-    return result;
-};
-
-const subtract = function (a, b) {
-    let result = a - b;
-    return result;
-};
-
-const multiply = function (a, b) {
-    let result = a * b;
-    return result;
-};
-
-const divide = function (a, b) {
-    let result = a / b;
-    return roundNumber(result);
-};
-
-const percent = function (a, b) {
-    let result = (a / b) * 100;
-    return roundNumber(result);
-};
+// additional functions for better user experience
+function roundNumber(num) {
+  return Math.round(num * 1000) / 1000;
+}
 
 //function to delete
 clear.addEventListener("click", function clearNumber() {
@@ -103,7 +99,3 @@ reset.addEventListener("click", function clearAll() {
     prevScreen.textContent = ""; // same as making it equal to currentNumber
     currScreen.textContent = ""; // both options work
 })
-// additional functions for better user experience
-function roundNumber(num) {
-  return Math.round(num * 1000) / 1000;
-}
