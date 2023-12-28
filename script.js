@@ -1,6 +1,7 @@
 // check that the page is loaded
 window.addEventListener("DOMContentLoaded", function() {
     console.log("Everything is loaded");
+
 })
 
 // define variables to work with
@@ -17,10 +18,12 @@ const currScreen = document.querySelector(".current-number");
 let previousNumber = "";
 let currentNumber = ""; 
 let operator = "";
-let result;
+let result = ""; // this is not tied to anything
+
 // to get the current and previous numbers
 numberButtons.forEach((button) => {
     button.addEventListener("click", function() {
+        if (button.value === "." && currentNumber.includes(".")) return;
         currentNumber += this.value; //current number this.value === this.textContent?
         currScreen.textContent = currentNumber; //current num is displayed
     })
@@ -36,36 +39,46 @@ actions.forEach((button) => {
     })
 });
 // make equal button functional
-equal.addEventListener("click", operate(previousNumber, currentNumber, operator));
+equal.addEventListener("click", function() {
+    operate();
+    prevScreen.textContent = "";
+    currScreen.textContent = currentNumber; // this is the problem line
+});
+let finish;
 //need to display it on the current screen
 function operate(previousNumber, currentNumber, operator) {
-    previousNumber = Number(previousNumber);
-    currentNumber = Number(currentNumber)
-    // switch (operator) {
-    //     case "+": return add(previousNumber, currentNumber)
-    //     case "-": return subtract(previousNumber, currentNumber)
-    //     case "*": return multiply(previousNumber, currentNumber)
-    //     case "/": return divide(previousNumber, currentNumber)
-    //     case "%": return percent(previousNumber, currentNumber)
-    //     default: return
-    // }
     
-    
+    previousNumber = parseFloat(previousNumber); 
+    currentNumber = parseFloat(currentNumber); 
+    switch (operator) {
+        case "+": parseFloat(finish) = add(previousNumber, currentNumber); 
+        case "-": parseFloat(finish) = subtract(previousNumber, currentNumber);
+        case "x": parseFloat(finish) = multiply(previousNumber, currentNumber);
+        case "/": parseFloat(finish) = divide(previousNumber, currentNumber);
+        case "%": parseFloat(finish) = percent(previousNumber, currentNumber);
+    } //return the result
+    currentNumber = finish;
+    operator = undefined;
+    previousNumber = "";
+    console.log(parseFloat(finish)); // why its not a number????
+    // previousNumber = previousNumber; // to string, even removed still get NaN
+    // currentNumber = previousNumber; // to string
 };
+
 //basic math operations functions
 const add = function (a, b) {
     let result = a + b;
-    return roundNumber(result);
+    return result;
 };
 
 const subtract = function (a, b) {
     let result = a - b;
-    return roundNumber(result);
+    return result;
 };
 
 const multiply = function (a, b) {
     let result = a * b;
-    return roundNumber(result);
+    return result;
 };
 
 const divide = function (a, b) {
@@ -87,9 +100,10 @@ reset.addEventListener("click", function clearAll() {
     previousNumber = "";
     currentNumber = "";
     operator = "";
-    prevScreen.textContent = currentNumber;
-    currScreen.textContent = currentNumber;
+    prevScreen.textContent = ""; // same as making it equal to currentNumber
+    currScreen.textContent = ""; // both options work
 })
+// additional functions for better user experience
 function roundNumber(num) {
   return Math.round(num * 1000) / 1000;
 }
