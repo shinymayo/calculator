@@ -20,6 +20,7 @@ let operator = "";
 numberButtons.forEach((button) => {
     button.addEventListener("click", function() {
         if (button.value === "." && currentNumber.includes(".")) return;
+        if (currentNumber.length > 10) return; 
         currentNumber += this.value; 
         currScreen.textContent = currentNumber;
     })

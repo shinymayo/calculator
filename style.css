@@ -21,7 +21,7 @@ body {
     border-radius: 10px;
 }
 .display {
-    border: 1px solid rgb(109, 89, 122);
+    border: 2px solid rgb(109, 89, 122);
     background-color: rgb(200, 231, 255, 0.80);
     width: 350px;
     height: 100px;
@@ -62,14 +62,14 @@ button {
     border-radius: 5px;
 }
 button:hover {
-    opacity: 0.8;
+    filter: brightness(120%);
 }
 .number {
     background-color: rgb(232, 140, 125);
 }
 .button.equal {
     width: 179px;
-    background-color: rgb(181, 101, 118);
+    background-color: rgb(200, 50, 73);
 }
 .operator {
     background-color: rgb(234, 172, 139);
