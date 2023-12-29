@@ -63,10 +63,10 @@ function operate() {
         result = previous * current;
         break;
       case "÷":
-        result = previous / current;
+        result = roundNumber(previous / current);
         break;
       case "%":
-        result = (previous / current) * 100;
+        result = roundNumber((previous / current) * 100);
         break;
       default:
         return;
