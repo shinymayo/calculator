@@ -63,8 +63,8 @@ function operate() {
         result = previous * current;
         break;
       case "÷":
-        result = roundNumber(previous / current);
-        break;
+        result = roundNumber(previous / current); //need a message
+        break; // if they try to divide by 0
       case "%":
         result = roundNumber((previous / current) * 100);
         break;
