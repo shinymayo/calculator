@@ -1,4 +1,4 @@
-// check that the page is loaded
+// page check
 window.addEventListener("DOMContentLoaded", function() {
     console.log("Everything is loaded");
 })
@@ -39,13 +39,13 @@ actions.forEach((button) => {
         currScreen.textContent = currentNumber;
     })
 });
-// make equal button functional
+// to make equal button functional
 equal.addEventListener("click", function() {
     operate();
     prevScreen.textContent = "";
     currScreen.textContent = currentNumber;
 });
-//need to display it on the current screen
+//calculator function
 function operate() {
     let result;
     const previous = parseFloat(previousNumber);
@@ -63,8 +63,8 @@ function operate() {
         result = previous * current;
         break;
       case "÷":
-        result = roundNumber(previous / current); //need a message
-        break; // if they try to divide by 0
+        result = roundNumber(previous / current);
+        break;
       case "%":
         result = roundNumber((previous / current) * 100);
         break;
@@ -76,17 +76,17 @@ function operate() {
     previousNumber = "";
 };
 
-//function to round the number --- works but how to incorporate it
+// function to round the number
 function roundNumber(num) {
   return Math.round(num * 1000) / 1000;
 }
 
-//function to delete
+// function to delete a number
 clear.addEventListener("click", function clearNumber() {
     currScreen.textContent = currScreen.textContent.toString().slice(0, -1);
 })
 
-//function to clear all
+// function to clear all
 reset.addEventListener("click", function clearAll() {
     previousNumber = "";
     currentNumber = "";
